@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-const stepsFolder = 'steps/'
+const activityFolder = 'Physical Activity/'
 const dayLog = []
 let currentDay = 0
 const objects = []
@@ -11,9 +11,11 @@ function parseDate (dateTime) {
   return `20${d[2]}-${d[0]}-${d[1]}`
 }
 
-const files = fs.readdirSync(stepsFolder)
+let files = fs.readdirSync(activityFolder)
+files = files.filter(f => f.startsWith('steps-'))
+
 files.forEach((jsonFile) => {
-  const content = fs.readFileSync(stepsFolder + jsonFile, 'utf8')
+  const content = fs.readFileSync(activityFolder + jsonFile, 'utf8')
   objects.push(...JSON.parse(content))
 })
 
